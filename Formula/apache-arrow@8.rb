@@ -9,8 +9,10 @@ class ApacheArrowAT8 < Formula
   head "https://github.com/apache/arrow.git", branch: "master"
 
   bottle do
+    sha256 cellar: :any,                 arm64_ventura:  "4125c0769a1f3fb51c0f252d82ab290e63a1d16061399ee5be20b31626617767"
     sha256 cellar: :any,                 arm64_monterey: "4125c0769a1f3fb51c0f252d82ab290e63a1d16061399ee5be20b31626617767"
     sha256 cellar: :any,                 arm64_big_sur:  "17a820a99038829114389477546eece3980a0b98d65a52738bb88ffb894d5b8d"
+    sha256 cellar: :any,                 ventura:        "c48250a2db3f527a8eb34d52d613e7147d41feccb2224fcef945497264818ed3"
     sha256 cellar: :any,                 monterey:       "c48250a2db3f527a8eb34d52d613e7147d41feccb2224fcef945497264818ed3"
     sha256 cellar: :any,                 big_sur:        "68933d8e138a7bb31f50f9c81f6c57bc29a14d088e0dc36f8d1e1f6d74fa42d9"
     sha256 cellar: :any,                 catalina:       "0353aa904e1021bf745f400c77e52074ec2303d3224cb908364bb00a8511005b"
