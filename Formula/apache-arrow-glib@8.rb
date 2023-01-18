@@ -41,7 +41,7 @@ class ApacheArrowGlibAT8 < Formula
         return 0;
       }
     SOURCE
-    apache_arrow = Formula["apache-arrow"]
+    apache_arrow = Formula["apache-arrow@8"]
     glib = Formula["glib"]
     flags = %W[
       -I#{include}
