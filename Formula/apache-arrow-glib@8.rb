@@ -11,16 +11,6 @@ class ApacheArrowGlibAT8 < Formula
     formula "apache-arrow"
   end
 
-  # compiled binaries don't exist anymore for these pruned formula
-  # bottle do
-  #   sha256 cellar: :any, arm64_monterey: "d5ca4c03e21608573570d28055ff7dba54ff16237c4e2e85953f85ab2b297400"
-  #   sha256 cellar: :any, arm64_big_sur:  "6a21e83c704d9734adafc7cbb4087ae6f0389c3cc537d0598fae0ec186cfcd4e"
-  #   sha256 cellar: :any, monterey:       "014cc1483619a6a4686d0e8a73fbd618ee41fb3a16e5e969d598af7c4ff28744"
-  #   sha256 cellar: :any, big_sur:        "7e407ababc447ecdcba628a18f6d1d974172db8fadb9fb1784196f023e50eb72"
-  #   sha256 cellar: :any, catalina:       "1c04df7e3fb2431974ecc8dbf3231611be54ca76799abe2d505bc807a8291555"
-  #   sha256               x86_64_linux:   "d049b74d0292bb4c61e40f353c4ca6e5a465e47e3a06d60a979eeccd355ca652"
-  # end
-
   depends_on "gobject-introspection" => :build
   depends_on "meson" => :build
   depends_on "ninja" => :build

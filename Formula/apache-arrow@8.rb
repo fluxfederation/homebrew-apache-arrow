@@ -10,17 +10,11 @@ class ApacheArrowAT8 < Formula
   revision 5
   head "https://github.com/apache/arrow.git", branch: "master"
 
-  # compiled binaries don't exist anymore for these pruned formula
-  # bottle do
-  #   sha256 cellar: :any,                 arm64_ventura:  "4125c0769a1f3fb51c0f252d82ab290e63a1d16061399ee5be20b31626617767"
-  #   sha256 cellar: :any,                 arm64_monterey: "4125c0769a1f3fb51c0f252d82ab290e63a1d16061399ee5be20b31626617767"
-  #   sha256 cellar: :any,                 ventura:        "c48250a2db3f527a8eb34d52d613e7147d41feccb2224fcef945497264818ed3"
-  #   sha256 cellar: :any,                 monterey:       "c48250a2db3f527a8eb34d52d613e7147d41feccb2224fcef945497264818ed3"
-  # end
-
   depends_on "boost" => :build
   depends_on "cmake" => :build
-  depends_on "llvm@14" => :build # Find supported LLVM versions in the arrow release definition of ARROW_LLVM_VERSIONS https://github.com/apache/arrow/blob/release-8.0.0/cpp/CMakeLists.txt#L113-L122
+  # Find supported LLVM versions in the arrow release definition of ARROW_LLVM_VERSIONS
+  # https://github.com/apache/arrow/blob/release-8.0.0/cpp/CMakeLists.txt#L113-L122
+  depends_on "llvm@14" => :build
   depends_on "aws-sdk-cpp"
   depends_on "brotli"
   depends_on "glog"
@@ -51,8 +45,6 @@ class ApacheArrowAT8 < Formula
     # https://issues.apache.org/jira/browse/ARROW-15664
     ENV["HOMEBREW_OPTIMIZATION_LEVEL"] = "O2"
 
-    # link against system libc++ instead of llvm provided libc++
-    # ENV.remove "HOMEBREW_LIBRARY_PATHS", Formula["llvm"].opt_lib
     args = %W[
       -DCMAKE_FIND_PACKAGE_PREFER_CONFIG=TRUE
       -DCMAKE_INSTALL_RPATH=#{rpath}
