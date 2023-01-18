@@ -1,21 +1,20 @@
 class ApacheArrowAT8 < Formula
   desc "Columnar in-memory analytics layer designed to accelerate big data"
   homepage "https://arrow.apache.org/"
+  # Note - SDK's built ontop of this demand an exact version match - bump this only in lockstep with them
+  # e.g. required_pkg_config_package on https://github.com/apache/arrow/blob/master/ruby/red-arrow/ext/arrow/extconf.rb
   url "https://www.apache.org/dyn/closer.lua?path=arrow/arrow-8.0.0/apache-arrow-8.0.0.tar.gz"
   mirror "https://archive.apache.org/dist/arrow/arrow-8.0.0/apache-arrow-8.0.0.tar.gz"
   sha256 "ad9a05705117c989c116bae9ac70492fe015050e1b80fb0e38fde4b5d863aaa3"
   license "Apache-2.0"
-  revision 4
+  revision 5
   head "https://github.com/apache/arrow.git", branch: "master"
-
-  bottle do
-    sha256 cellar: :any,                 arm64_ventura:  "4125c0769a1f3fb51c0f252d82ab290e63a1d16061399ee5be20b31626617767"
-    sha256 cellar: :any,                 ventura:        "c48250a2db3f527a8eb34d52d613e7147d41feccb2224fcef945497264818ed3"
-  end
 
   depends_on "boost" => :build
   depends_on "cmake" => :build
-  depends_on "llvm" => :build
+  # Find supported LLVM versions in the arrow release definition of ARROW_LLVM_VERSIONS
+  # https://github.com/apache/arrow/blob/release-8.0.0/cpp/CMakeLists.txt#L113-L122
+  depends_on "llvm@14" => :build
   depends_on "aws-sdk-cpp"
   depends_on "brotli"
   depends_on "glog"
@@ -39,9 +38,6 @@ class ApacheArrowAT8 < Formula
   fails_with gcc: "5"
 
   def install
-    # ==========================================================================
-    # TODO figure out how to ignore!!!
-    # ==========================================================================
     # https://github.com/Homebrew/homebrew-core/issues/76537
     # ENV.runtime_cpu_detection if Hardware::CPU.intel?
 
@@ -49,8 +45,6 @@ class ApacheArrowAT8 < Formula
     # https://issues.apache.org/jira/browse/ARROW-15664
     ENV["HOMEBREW_OPTIMIZATION_LEVEL"] = "O2"
 
-    # link against system libc++ instead of llvm provided libc++
-    ENV.remove "HOMEBREW_LIBRARY_PATHS", Formula["llvm"].opt_lib
     args = %W[
       -DCMAKE_FIND_PACKAGE_PREFER_CONFIG=TRUE
       -DCMAKE_INSTALL_RPATH=#{rpath}
