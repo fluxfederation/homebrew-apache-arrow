@@ -1,12 +1,13 @@
 class ApacheArrowAT8 < Formula
   desc "Columnar in-memory analytics layer designed to accelerate big data"
   homepage "https://arrow.apache.org/"
-  # TODO: https://archive.apache.org/dist/arrow/arrow-8.0.1/apache-arrow-8.0.1.tar.gz
+  # Note - SDK's built ontop of this demand an exact version match - bump this only in lockstep with them
+  # e.g. required_pkg_config_package on https://github.com/apache/arrow/blob/master/ruby/red-arrow/ext/arrow/extconf.rb
   url "https://www.apache.org/dyn/closer.lua?path=arrow/arrow-8.0.0/apache-arrow-8.0.0.tar.gz"
   mirror "https://archive.apache.org/dist/arrow/arrow-8.0.0/apache-arrow-8.0.0.tar.gz"
   sha256 "ad9a05705117c989c116bae9ac70492fe015050e1b80fb0e38fde4b5d863aaa3"
   license "Apache-2.0"
-  revision 4
+  revision 5
   head "https://github.com/apache/arrow.git", branch: "master"
 
   bottle do
@@ -18,26 +19,23 @@ class ApacheArrowAT8 < Formula
 
   depends_on "boost" => :build
   depends_on "cmake" => :build
-  depends_on "llvm" => :build
+  depends_on "llvm@11" => :build
   depends_on "aws-sdk-cpp"
   depends_on "brotli"
-  # depends_on "bzip2" # From master formula (arrow@10.0.1)
   depends_on "glog"
   depends_on "grpc"
   depends_on "lz4"
-  depends_on "numpy" # Removed in master formula (arrow@10.0.1)
+  depends_on "numpy"
   depends_on "openssl@1.1"
   depends_on "protobuf"
-  depends_on "python@3.10" # Removed in master formula (arrow@10.0.1)
+  depends_on "python@3.10"
   depends_on "rapidjson"
   depends_on "re2"
   depends_on "snappy"
   depends_on "thrift"
   depends_on "utf8proc"
-  # depends_on "z3" # From master formula (arrow@10.0.1)
   depends_on "zstd"
 
-  # on_linux not present in arrow@10.0.1 although that does declare linux support
   on_linux do
     depends_on "gcc"
   end
@@ -53,7 +51,7 @@ class ApacheArrowAT8 < Formula
     ENV["HOMEBREW_OPTIMIZATION_LEVEL"] = "O2"
 
     # link against system libc++ instead of llvm provided libc++
-    ENV.remove "HOMEBREW_LIBRARY_PATHS", Formula["llvm"].opt_lib
+    # ENV.remove "HOMEBREW_LIBRARY_PATHS", Formula["llvm"].opt_lib
     args = %W[
       -DCMAKE_FIND_PACKAGE_PREFER_CONFIG=TRUE
       -DCMAKE_INSTALL_RPATH=#{rpath}
