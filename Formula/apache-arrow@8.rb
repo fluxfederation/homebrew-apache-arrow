@@ -10,12 +10,13 @@ class ApacheArrowAT8 < Formula
   revision 5
   head "https://github.com/apache/arrow.git", branch: "master"
 
-  bottle do
-    sha256 cellar: :any,                 arm64_ventura:  "4125c0769a1f3fb51c0f252d82ab290e63a1d16061399ee5be20b31626617767"
-    sha256 cellar: :any,                 arm64_monterey: "4125c0769a1f3fb51c0f252d82ab290e63a1d16061399ee5be20b31626617767"
-    sha256 cellar: :any,                 ventura:        "c48250a2db3f527a8eb34d52d613e7147d41feccb2224fcef945497264818ed3"
-    sha256 cellar: :any,                 monterey:       "c48250a2db3f527a8eb34d52d613e7147d41feccb2224fcef945497264818ed3"
-  end
+  # compiled binaries don't exist anymore for these pruned formula
+  # bottle do
+  #   sha256 cellar: :any,                 arm64_ventura:  "4125c0769a1f3fb51c0f252d82ab290e63a1d16061399ee5be20b31626617767"
+  #   sha256 cellar: :any,                 arm64_monterey: "4125c0769a1f3fb51c0f252d82ab290e63a1d16061399ee5be20b31626617767"
+  #   sha256 cellar: :any,                 ventura:        "c48250a2db3f527a8eb34d52d613e7147d41feccb2224fcef945497264818ed3"
+  #   sha256 cellar: :any,                 monterey:       "c48250a2db3f527a8eb34d52d613e7147d41feccb2224fcef945497264818ed3"
+  # end
 
   depends_on "boost" => :build
   depends_on "cmake" => :build
