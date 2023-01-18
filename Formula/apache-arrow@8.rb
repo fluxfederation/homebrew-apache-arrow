@@ -46,7 +46,7 @@ class ApacheArrowAT8 < Formula
 
   def install
     # https://github.com/Homebrew/homebrew-core/issues/76537
-    ENV.runtime_cpu_detection if Hardware::CPU.intel?
+    # ENV.runtime_cpu_detection if Hardware::CPU.intel?
 
     # https://github.com/Homebrew/homebrew-core/issues/94724
     # https://issues.apache.org/jira/browse/ARROW-15664
