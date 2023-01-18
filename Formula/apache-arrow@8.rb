@@ -19,7 +19,7 @@ class ApacheArrowAT8 < Formula
 
   depends_on "boost" => :build
   depends_on "cmake" => :build
-  depends_on "llvm@14" => :build
+  depends_on "llvm@14" => :build # Find supported LLVM versions in the arrow release definition of ARROW_LLVM_VERSIONS https://github.com/apache/arrow/blob/release-8.0.0/cpp/CMakeLists.txt#L113-L122
   depends_on "aws-sdk-cpp"
   depends_on "brotli"
   depends_on "glog"
@@ -48,7 +48,7 @@ class ApacheArrowAT8 < Formula
 
     # https://github.com/Homebrew/homebrew-core/issues/94724
     # https://issues.apache.org/jira/browse/ARROW-15664
-    # ENV["HOMEBREW_OPTIMIZATION_LEVEL"] = "O2"
+    ENV["HOMEBREW_OPTIMIZATION_LEVEL"] = "O2"
 
     # link against system libc++ instead of llvm provided libc++
     # ENV.remove "HOMEBREW_LIBRARY_PATHS", Formula["llvm"].opt_lib
